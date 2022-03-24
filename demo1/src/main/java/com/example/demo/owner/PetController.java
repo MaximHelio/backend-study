@@ -1,4 +1,4 @@
-package org.springframework.samples.petclinic.owner;
+package com.example.demo.owner;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -8,23 +8,26 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.acl.Owner;
 import java.util.Collection;
 
-
+//직접 view(jsp, tymeleaf)파일을 내보내야할 때 사용
+//rest api 사용사면서 controller 이제 사용x
 @Controller
 @RequestMapping("/owners/{ownerId}")
 class PetController {
 
     private static final String VIEWS_PETS_CREATE_OR_UPDATE_FORM = "pets/createOrUpdatePetForm";
 
-    private final OwnerRepository owners;
+    //OwnerRepository의 생성 책임x => 결합도 낮춤
+    private final org.springframework.example.demo.owner.OwnerRepository owners;
 
-    public PetController(OwnerRepository owners) {
+    public PetController(org.springframework.example.demo.owner.OwnerRepository owners) {
         this.owners = owners;
     }
 
     @ModelAttribute("types")
-    public Collection<PetType> populatePetTypes() {
+    public Collection<org.springframework.example.demo.owner.PetType> populatePetTypes() {
         return this.owners.findPetTypes();
     }
 
@@ -40,19 +43,19 @@ class PetController {
 
     @InitBinder("pet")
     public void initPetBinder(WebDataBinder dataBinder) {
-        dataBinder.setValidator(new PetValidator());
+        dataBinder.setValidator(new org.springframework.example.demo.owner.PetValidator());
     }
 
     @GetMapping("/pets/new")
     public String initCreationForm(Owner owner, ModelMap model) {
-        Pet pet = new Pet();
+        org.springframework.example.demo.owner.Pet pet = new org.springframework.example.demo.owner.Pet();
         owner.addPet(pet);
         model.put("pet", pet);
         return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
     }
 
     @PostMapping("/pets/new")
-    public String processCreationForm(Owner owner, @Valid Pet pet, BindingResult result, ModelMap model) {
+    public String processCreationForm(Owner owner, @Valid org.springframework.example.demo.owner.Pet pet, BindingResult result, ModelMap model) {
         if (StringUtils.hasLength(pet.getName()) && pet.isNew() && owner.getPet(pet.getName(), true) != null) {
             result.rejectValue("name", "duplicate", "already exists");
         }
@@ -69,13 +72,13 @@ class PetController {
 
     @GetMapping("/pets/{petId}/edit")
     public String initUpdateForm(Owner owner, @PathVariable("petId") int petId, ModelMap model) {
-        Pet pet = owner.getPet(petId);
+        org.springframework.example.demo.owner.Pet pet = owner.getPet(petId);
         model.put("pet", pet);
         return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
     }
 
     @PostMapping("/pets/{petId}/edit")
-    public String processUpdateForm(@Valid Pet pet, BindingResult result, Owner owner, ModelMap model) {
+    public String processUpdateForm(@Valid org.springframework.example.demo.owner.Pet pet, BindingResult result, Owner owner, ModelMap model) {
         if (result.hasErrors()) {
             model.put("pet", pet);
             return VIEWS_PETS_CREATE_OR_UPDATE_FORM;

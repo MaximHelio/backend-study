@@ -1,5 +1,6 @@
-package org.springframework.example.demo.owner;
+package com.example.demo.owner;
 
+import java.Owner;
 import java.util.List;
 import java.util.Map;
 
@@ -25,9 +26,9 @@ class OwnerController {
 
     private static final String VIEWS_OWNER_CREATE_OR_UPDATE_FORM = "owners/createOrUpdateOwnerForm";
 
-    private final OwnerRepository owners;
+    private final org.springframework.example.demo.owner.OwnerRepository owners;
 
-    public OwnerController(OwnerRepository clinicService) {
+    public OwnerController(org.springframework.example.demo.owner.OwnerRepository clinicService) {
         this.owners = clinicService;
     }
 

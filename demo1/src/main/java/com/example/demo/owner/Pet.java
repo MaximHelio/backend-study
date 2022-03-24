@@ -1,4 +1,4 @@
-package org.springframework.example.demo.owner;
+package com.example.demo.owner;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -15,8 +15,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import com.example.demo.model.NamedEntity;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.samples.petclinic.model.NamedEntity;
+// import org.springframework.samples.petclinic.model.NamedEntity;
 
 
 @Entity
@@ -29,12 +30,12 @@ public class Pet extends NamedEntity {
 
     @ManyToOne
     @JoinColumn(name = "type_id")
-    private PetType type;
+    private org.springframework.example.demo.owner.PetType type;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "pet_id")
     @OrderBy("visit_date ASC")
-    private Set<Visit> visits = new LinkedHashSet<>();
+    private Set<org.springframework.example.demo.owner.Visit> visits = new LinkedHashSet<>();
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
@@ -44,19 +45,19 @@ public class Pet extends NamedEntity {
         return this.birthDate;
     }
 
-    public PetType getType() {
+    public org.springframework.example.demo.owner.PetType getType() {
         return this.type;
     }
 
-    public void setType(PetType type) {
+    public void setType(org.springframework.example.demo.owner.PetType type) {
         this.type = type;
     }
 
-    public Collection<Visit> getVisits() {
+    public Collection<org.springframework.example.demo.owner.Visit> getVisits() {
         return this.visits;
     }
 
-    public void addVisit(Visit visit) {
+    public void addVisit(org.springframework.example.demo.owner.Visit visit) {
         getVisits().add(visit);
     }
 

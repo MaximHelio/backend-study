@@ -20,6 +20,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+//	web에 필요한 종속성 한번에 넣어줌. Spring boot 사용하면 이 종속성으로 편리
+//	Spring boot 버전에 따라 오른쪽 dependency  버전 자동으로 정해짐
+	// implementaion 찾아보기
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	runtimeOnly 'mysql:mysql-connector-java'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
