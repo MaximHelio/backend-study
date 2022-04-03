@@ -1,5 +1,7 @@
-package com.example.demo.owner;
+package com.example.demo.presentation;
 
+import com.example.demo.domain.OwnerRepository;
+import com.example.demo.domain.PetType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
@@ -20,14 +22,14 @@ class PetController {
     private static final String VIEWS_PETS_CREATE_OR_UPDATE_FORM = "pets/createOrUpdatePetForm";
 
     //OwnerRepository의 생성 책임x => 결합도 낮춤
-    private final org.springframework.example.demo.owner.OwnerRepository owners;
+    private final OwnerRepository owners;
 
-    public PetController(org.springframework.example.demo.owner.OwnerRepository owners) {
+    public PetController(OwnerRepository owners) {
         this.owners = owners;
     }
 
     @ModelAttribute("types")
-    public Collection<org.springframework.example.demo.owner.PetType> populatePetTypes() {
+    public Collection<PetType> populatePetTypes() {
         return this.owners.findPetTypes();
     }
 
@@ -43,7 +45,7 @@ class PetController {
 
     @InitBinder("pet")
     public void initPetBinder(WebDataBinder dataBinder) {
-        dataBinder.setValidator(new org.springframework.example.demo.owner.PetValidator());
+        dataBinder.setValidator(new PetValidator());
     }
 
     @GetMapping("/pets/new")

@@ -1,4 +1,4 @@
-package com.example.demo.owner;
+package com.example.demo.presentation;
 
 import java.Owner;
 import java.util.List;
@@ -6,31 +6,27 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import com.example.demo.domain.Owner;
+import com.example.demo.domain.OwnerRepository;
+import com.example.demo.presentation.dto.OwnerV1Response;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 
-@Controller
+@RestController
+@RequiredArgsConstructor
 class OwnerController {
 
     private static final String VIEWS_OWNER_CREATE_OR_UPDATE_FORM = "owners/createOrUpdateOwnerForm";
 
-    private final org.springframework.example.demo.owner.OwnerRepository owners;
-
-    public OwnerController(org.springframework.example.demo.owner.OwnerRepository clinicService) {
-        this.owners = clinicService;
-    }
+    private final OwnerRepository owners;
 
     @InitBinder
     public void setAllowedFields(WebDataBinder dataBinder) {
@@ -38,10 +34,13 @@ class OwnerController {
     }
 
     @GetMapping("/owners/new")
-    public String initCreationForm(Map<String, Object> model) {
+    public OwnerV1Response initCreationForm(Map<String, Object> model) {
         Owner owner = new Owner();
-        model.put("owner", owner);
-        return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
+        // model.put("owner", owner);
+        // return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
+        //return owner;
+        return new OwnerV1Response(owner);
+        // request 객체랑 response 객체는 따로 만듦 => domain객체랑 동일하다 했을 때도 분리해줌
     }
 
     @PostMapping("/owners/new")

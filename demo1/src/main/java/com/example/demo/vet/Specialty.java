@@ -8,6 +8,6 @@ import com.example.demo.model.NamedEntity
 
 @Entity
 @Table(name="specialties")
-pulic class Specialty extends NamedEntity {
+public class Specialty extends NamedEntity {
 
 }

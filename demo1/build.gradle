@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.6.4'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id "io.freefair.lombok" version "6.4.1"
 }
 
 group = 'com.example'
@@ -9,6 +10,7 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 repositories {
+	// 오픈된 mvnrepository에 접근
 	mavenCentral()
 }
 
@@ -20,14 +22,18 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
-//	web에 필요한 종속성 한번에 넣어줌. Spring boot 사용하면 이 종속성으로 편리
-//	Spring boot 버전에 따라 오른쪽 dependency  버전 자동으로 정해짐
+	// web에 필요한 종속성 한번에 넣어줌. Spring boot 사용하면 이 종속성으로 편리
+	// Spring boot 버전에 따라 오른쪽 dependency  버전 자동으로 정해짐
 	// implementaion 찾아보기
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	runtimeOnly 'mysql:mysql-connector-java'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.testcontainers:junit-jupiter'
 	testImplementation 'org.testcontainers:mysql'
+	// https://mvnrepository.com/artifact/org.projectlombok/lombok
+	// lombok은 annotation으로 들어감
+	//compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.22'
+
 }
 
 dependencyManagement {

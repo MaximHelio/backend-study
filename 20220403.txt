@@ -1,0 +1,37 @@
+2022-04-23
+
+
+layered architecture => 관심사, / package 별로 분리
+- presentation
+   - interface layer => spring에서 controller가 들어감 / user에게 최종적으로 전달되는 layer나 interface역할을 하게 됨
+   - web 관련된 개체들이 종속적으로 들어감
+
+- application
+    - 하나의 기능적인 요구사항을 만족시키기 위한 어플로 구성하는 계층
+    - 도메인과 다르게, 도메인 레이어를 이용해서 하나의 기능을 완성시킴
+    - 예를들어, client입장에서는 하나의 기능이어도 user도메인의 기능을 한번 호출해야하고, 그 user가 아닌, 
+    - 사용자가 상품을 구매한다고 하면, 상품 구매 api호출 
+    - application에서 상품 구매하기 위한 모든 것을 호출해주어야 하는데, 상품에 뭐있는지 실제 조회를 해줘야 하고, product라는 도메인에 있는 기능을 활용해서 
+    - 재고 관련된 도메인으로 들어가서, 재고 확인 후 결제 관련 도메인에서 기능을 활용해서 결제를 진행
+    - 하나의 기능(유스케이스)을 수행하기 위한 로직을 작성하는 것
+
+- domain
+     - 도메인 객체들, 서비스 클래스, 비즈니스 로직을 수행하기 위한 객체들이 도메인 layer에 포함되어있음.
+     - JPA_도메인 객체, persistence 객체랑 직접적으로 매핑하지 않아도 자동으로 매핑을 지원=> 개발 속도 향상_ 사용하는 경우, Entity 객체들이 들어감
+     - domain layer에 JPA 관련된 기술적인 annotation_DB관련된 기능이 포함_이 추가
+     - JDBC나 Mybatis 사용시, domian 객체가 domain에 있고, infrastructure에 entity class가 따로 있을 것
+     - domain class랑 entity class가 따로 있을 경우, user domain 정보를 infrastructure에서 받아서 entity class로 변홚후, 저장해야함
+     - mapping하는 과정을 jpa에서는 지원해주기 때문에 생략가능
+
+- infrastructure
+     - 비즈니스 로직과는 관련 없고, 하부 기술들을 구현하기 위한 DB에 데이터를 저장하거나, redis에 접근한다거나 메시지 브로커같은 rabbitMQ나 KAFKa같은 곳ㅅ에 기술적인 layer전달 
+     - 도메인 layer로 기술적인 로직이 섞여들어가지 않도록 하는 기능
+
+
+현재는 도메인 별로 분리
+
+
+- JPA + QUERY Dsl => plugin
+- Rest API 공부 
+- 블로그 글 간단히 보고 회사거 보기 
+- Map<String, Object> => 풀기

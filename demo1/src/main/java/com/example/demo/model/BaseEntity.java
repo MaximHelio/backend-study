@@ -24,7 +24,7 @@ public class BaseEntity implements Serializable{
         this.id = id;
     }
 
-    pulic boolean isNew(){
+    pulic public boolean isNew(){
         return this.id == null;
     }
 }

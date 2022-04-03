@@ -1,4 +1,4 @@
-package com.example.demo.owner;
+package com.example.demo.domain;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -30,12 +30,12 @@ public class Pet extends NamedEntity {
 
     @ManyToOne
     @JoinColumn(name = "type_id")
-    private org.springframework.example.demo.owner.PetType type;
+    private PetType type;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "pet_id")
     @OrderBy("visit_date ASC")
-    private Set<org.springframework.example.demo.owner.Visit> visits = new LinkedHashSet<>();
+    private Set<Visit> visits = new LinkedHashSet<>();
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
@@ -45,19 +45,19 @@ public class Pet extends NamedEntity {
         return this.birthDate;
     }
 
-    public org.springframework.example.demo.owner.PetType getType() {
+    public PetType getType() {
         return this.type;
     }
 
-    public void setType(org.springframework.example.demo.owner.PetType type) {
+    public void setType(PetType type) {
         this.type = type;
     }
 
-    public Collection<org.springframework.example.demo.owner.Visit> getVisits() {
+    public Collection<Visit> getVisits() {
         return this.visits;
     }
 
-    public void addVisit(org.springframework.example.demo.owner.Visit visit) {
+    public void addVisit(Visit visit) {
         getVisits().add(visit);
     }
 

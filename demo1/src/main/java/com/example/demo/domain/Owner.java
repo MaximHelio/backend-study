@@ -1,3 +1,10 @@
+package com.example.demo.domain;
+
+import com.example.demo.model.Person;
+import lombok.Getter;
+
+import java.util.List;
+@Getter
 public class Owner extends Person {
     private String address;
 

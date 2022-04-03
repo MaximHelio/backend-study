@@ -1,4 +1,4 @@
-package org.springframework.example.demo.owner;
+package com.example.demo.domain;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.Formatter;

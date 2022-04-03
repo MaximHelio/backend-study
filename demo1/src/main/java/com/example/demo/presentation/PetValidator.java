@@ -1,5 +1,6 @@
-package org.springframework.example.demo.owner;
+package com.example.demo.presentation;
 
+import com.example.demo.domain.Pet;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;

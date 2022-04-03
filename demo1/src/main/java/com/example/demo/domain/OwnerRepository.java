@@ -1,4 +1,4 @@
-package org.springframework.example.demo.owner
+package com.example.demo.domain
 
 import java.util.List
 
